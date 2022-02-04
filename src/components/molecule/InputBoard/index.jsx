@@ -6,9 +6,9 @@ import {Icon} from "../../atom/Icon";
 export const InputBoard = ({children}) => {
     return (
         <div className="input-container">
-            <Input/>
+            <Input id="numberOne"/>
             <span>{children}</span>
-            <Input/>
+            <Input id="numberTwo"/>
             <Icon>=</Icon>
             <Input readOnly/>
         </div>
