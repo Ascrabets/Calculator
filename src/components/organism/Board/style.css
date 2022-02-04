@@ -1,0 +1,19 @@
+.board-container {
+    max-width: 450px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.board-content {
+    max-width: 450px;
+    width: 100%;
+}
+
+.answer-button {
+    max-width: 450px;
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,19 @@
+
+.input {
+    width: 70px;
+    height: 50px;
+    background: rgba(42, 40, 40, 0.53);
+    border-radius: 15px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    color: #E44040;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.input:active, :hover, :focus , :disabled{
+    outline: 0;
+    outline-offset: 0;
+
+}
