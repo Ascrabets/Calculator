@@ -1,7 +1,7 @@
 function isPrime(n) {
-    for(let i = 2; i <= Math.sqrt(n)
+    for (let i = 2; i <= Math.sqrt(n)
         ; i += 1) {
-        if (n % i === 0){
+        if (n % i === 0) {
             return false;
         }
     }
@@ -9,11 +9,14 @@ function isPrime(n) {
 }
 
 export function calculateGreatestPrimeInRange(low, high) {
-    const primes = [];
-    for (let i = low; i <= high; i += 1) {
-        if (isPrime(i)) primes.push(i);
+    let prime = undefined;
+    for (let i = high; i >= low; i -= 1) {
+        if (isPrime(i)) {
+            prime = i;
+            break;
+        }
     }
-    return primes.length ? primes.pop() : -1;
+    return prime;
 }
 
 export const Calculation = (numberOne, numberTwo, type) => {

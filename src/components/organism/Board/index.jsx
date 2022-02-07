@@ -30,7 +30,7 @@ export const Board = () => {
     };
 
     const setData = (key, value) => {
-        return setFormData({...formData, [key]: value});
+        return setFormData((() => ({...formData, [key]: value})));
     };
 
     function onChangeData(e, key) {
@@ -42,7 +42,7 @@ export const Board = () => {
 
     const saveResult = () => {
         const history = JSON.parse(localStorage.getItem('history')) || [];
-        history.push(`${formData['numberOne']}${operationSelector['operation']}${formData['numberTwo']}=${formData['result']}`);
+        history.push(`${formData['numberOne']}${operationSelector['operation']}${formData['numberTwo']}=${Calculation(formData['numberOne'], formData['numberTwo'], operationSelector['operation'])}`);
         localStorage.setItem('history', JSON.stringify(history));
     };
 
