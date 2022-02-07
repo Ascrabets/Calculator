@@ -1,23 +1,20 @@
-const isPrime = num => {
-    let count = 2;
-    while(count < (num / 2)+1){
-        if(num % count !== 0){
-            count++;
-            continue;
+function isPrime(n) {
+    for(let i = 2; i <= Math.sqrt(n)
+        ; i += 1) {
+        if (n % i === 0){
+            return false;
         }
-        return false;
     }
     return true;
-};
-export const primeBetween = (numberOne, numberTwo) => {
-    let count = 0;
-    for(let i = Math.min(numberOne, numberTwo); i <= Math.max(numberOne, numberTwo); i++){
-        if(isPrime(i)){
-            count++;
-        }
+}
+
+export function calculateGreatestPrimeInRange(low, high) {
+    const primes = [];
+    for (let i = low; i <= high; i += 1) {
+        if (isPrime(i)) primes.push(i);
     }
-    return count;
-};
+    return primes.length ? primes.pop() : -1;
+}
 
 export const Calculation = (numberOne, numberTwo, type) => {
     switch (type) {
@@ -28,6 +25,6 @@ export const Calculation = (numberOne, numberTwo, type) => {
         case "%":
             return parseFloat(numberOne) % parseFloat(numberTwo);
         case "hp":
-            return primeBetween(numberOne, numberTwo)
+            return calculateGreatestPrimeInRange(numberOne, numberTwo)
     }
 }

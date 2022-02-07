@@ -6,15 +6,23 @@ import {Button} from "../../atom/Button";
 import {Input} from "../../atom/Input";
 import {useState} from "react";
 import {Calculation} from "../../service/operation";
+import {useModal} from "react-hooks-use-modal";
+import {History} from "../../hisrory/History";
 
 export const Board = () => {
     const [formData, setFormData] = useState({});
     const operationSelector = useSelector(state => state);
 
-    const onFormSubmit = (event) => {
+    const [Modal, open, close] = useModal('root', {
+        preventScroll: false,
+        closeOnOverlayClick: true
+    });
+
+    const onSubmit = (event) => {
         event.preventDefault();
         let result = Calculation(formData['numberOne'], formData['numberTwo'], operationSelector['operation'])
         setData('result', result);
+        saveResult();
     };
 
     const getData = (key) => {
@@ -22,22 +30,28 @@ export const Board = () => {
     };
 
     const setData = (key, value) => {
-        return setFormData({ ...formData, [key]: value });
+        return setFormData({...formData, [key]: value});
     };
 
-    function onChangeData (e, key) {
+    function onChangeData(e, key) {
         const re = /^-?\d+\.?\d*$/;
         if (e.target.value === '' || re.test(e.target.value)) {
             setData(key, e.target.value);
         }
     }
 
+    const saveResult = () => {
+        const history = JSON.parse(localStorage.getItem('history')) || [];
+        history.push(`${formData['numberOne']}${operationSelector['operation']}${formData['numberTwo']}=${formData['result']}`);
+        localStorage.setItem('history', JSON.stringify(history));
+    };
+
     return (
         <div className="board-container">
             <div className="board-content">
                 <div className="input-container">
                     <Input id="numberOne" value={getData('numberOne')} onChange={(e) => onChangeData(e, 'numberOne')}/>
-                        <span>
+                    <span>
                             <Icon>
                                 {operationSelector['operation']}
                             </Icon>
@@ -48,10 +62,25 @@ export const Board = () => {
                 </div>
                 <OperationBoard/>
                 <div className="answer-button">
-                    <Button onClick={onFormSubmit} type="submit" style={{width: "145px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
+                    <Button onClick={open}
+                            style={{width: "145px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
+                        History
+                    </Button>
+                    <Button onClick={onSubmit} type="submit"
+                            style={{width: "145px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
                         =
                     </Button>
                 </div>
+                <Modal>
+                    <div className="pop-container">
+                        <div className="pop-content">
+                            <h1>History</h1>
+                            <div className="history">
+                                <History/>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
             </div>
         </div>
     )

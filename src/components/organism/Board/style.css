@@ -15,7 +15,7 @@
     width: 100%;
     padding-top: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .input-container {
@@ -24,4 +24,41 @@
     height: 70px;
     display: flex;
     justify-content: space-between;
+}
+
+.pop-container {
+    width: 550px;
+    min-height: 700px;
+    background: linear-gradient(180deg, #2E2E2E 0%, #2C2C2C 50.52%, rgba(36, 36, 36, 0.87) 100%);
+    border-radius: 15px;
+}
+
+.pop-content {
+    width: 500px;
+    padding: 25px;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.pop-content > h1 {
+    text-align: center;
+}
+
+.pop-content > div {
+    margin-top: 30px;
+}
+
+.pop-content > div > div > p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    color: #E44040;
+}
+
+.history-button {
+    max-width: 500px;
+}
+
+.history {
+    height: 700px;
+    overflow: scroll;
 }

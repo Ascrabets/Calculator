@@ -1,10 +1,8 @@
 import React from "react";
 import {mount, render, shallow} from "enzyme";
-import App from "../App";
 import {Button} from "../components/atom/Button";
 import {Input} from "../components/atom/Input";
 import {Icon} from "../components/atom/Icon";
-import {primeBetween} from "../components/service/operation";
 
 
 describe("Render elements", () => {
@@ -24,6 +22,3 @@ describe("Render elements", () => {
     })
 })
 
-it("test 'highest prime' function", () => {
-    expect(primeBetween(1, 10)).toEqual(5);
-})
