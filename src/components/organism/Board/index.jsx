@@ -25,13 +25,9 @@ export const Board = () => {
         saveResult();
     };
 
-    const getData = (key) => {
-        return formData.hasOwnProperty(key) ? formData[key] : '';
-    };
+    const getData = (key) => formData.hasOwnProperty(key) ? formData[key] : '';
 
-    const setData = (key, value) => {
-        return setFormData((() => ({...formData, [key]: value})));
-    };
+    const setData = (key, value) => setFormData((() => ({...formData, [key]: value})));
 
     function onChangeData(e, key) {
         const re = /^-?\d+\.?\d*$/;
