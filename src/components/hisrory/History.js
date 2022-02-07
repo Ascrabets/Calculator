@@ -12,7 +12,7 @@ export const History = () => {
     return (
         <div>
             <Button onClick={deleteHistory} type="submit"
-                    style={{width: "100px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
+                    className="custom-button-history custom-button button-container">
                 clear
             </Button>
 

@@ -29,5 +29,7 @@ export const Calculation = (numberOne, numberTwo, type) => {
             return parseFloat(numberOne) % parseFloat(numberTwo);
         case "hp":
             return calculateGreatestPrimeInRange(numberOne, numberTwo)
+        default:
+            return "none";
     }
 }

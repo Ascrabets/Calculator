@@ -13,7 +13,7 @@ export const Board = () => {
     const [formData, setFormData] = useState({});
     const operationSelector = useSelector(state => state);
 
-    const [Modal, open, close] = useModal('root', {
+    const [Modal, open] = useModal('root', {
         preventScroll: false,
         closeOnOverlayClick: true
     });
@@ -58,12 +58,10 @@ export const Board = () => {
                 </div>
                 <OperationBoard/>
                 <div className="answer-button">
-                    <Button onClick={open}
-                            style={{width: "145px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
+                    <Button onClick={open} className="custom-button button-container">
                         History
                     </Button>
-                    <Button onClick={onSubmit} type="submit"
-                            style={{width: "145px", height: "50px", background: "#FF3A3A", color: "#FFFF"}}>
+                    <Button onClick={onSubmit} type="submit" className="custom-button button-container">
                         =
                     </Button>
                 </div>

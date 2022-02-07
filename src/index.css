@@ -13,3 +13,16 @@ body {
     align-items: center;
     height: 1000px;
 }
+
+.custom-button {
+    background: #FF3A3A;
+    color: #FFFF;
+}
+
+.custom-button > span{
+    color: #FFFF;
+}
+
+.custom-button-history {
+    margin-bottom: 30px;
+}
