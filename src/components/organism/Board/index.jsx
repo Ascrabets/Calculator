@@ -8,8 +8,11 @@ import {useState} from "react";
 import {Calculation} from "../../service/operation";
 import {useModal} from "react-hooks-use-modal";
 import {History} from "../../hisrory/History";
+import API from "../../service/api";
+import axios from "axios";
 
 export const Board = () => {
+    const BASE_URL = 'http://localhost:8080/api/v1/calculate'
     const [formData, setFormData] = useState({});
     const operationSelector = useSelector(state => state);
 
@@ -20,8 +23,11 @@ export const Board = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        let result = Calculation(formData['numberOne'], formData['numberTwo'], operationSelector['operation'])
-        setData('result', result);
+        axios.post(BASE_URL, {
+            operand1: formData['numberOne'],
+            operand2: formData['numberTwo'],
+            operation: operationSelector['operation']
+        }).then(response => {setData('result', response.data)});
         saveResult();
     };
 
@@ -38,13 +44,14 @@ export const Board = () => {
 
     const saveResult = () => {
         const history = JSON.parse(localStorage.getItem('history')) || [];
-        history.push(`${formData['numberOne']}${operationSelector['operation']}${formData['numberTwo']}=${Calculation(formData['numberOne'], formData['numberTwo'], operationSelector['operation'])}`);
+        history.push(`${formData['numberOne']}${operationSelector['operation']}${formData['numberTwo']}=${formData['result']}`);
         localStorage.setItem('history', JSON.stringify(history));
     };
 
     return (
         <div className="board-container">
             <div className="board-content">
+                <form onSubmit={onSubmit}>
                 <div className="input-container">
                     <Input id="numberOne" value={getData('numberOne')} onChange={(e) => onChangeData(e, 'numberOne')}/>
                     <span>
@@ -61,10 +68,12 @@ export const Board = () => {
                     <Button onClick={open} className="custom-button button-container">
                         History
                     </Button>
-                    <Button onClick={onSubmit} type="submit" className="custom-button button-container">
+                    <Button type="submit" className="custom-button button-container">
                         =
                     </Button>
+                    <button type="submit">=</button>
                 </div>
+                </form>
                 <Modal>
                     <div className="pop-container">
                         <div className="pop-content">
